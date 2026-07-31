@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScheduleMate - Your Smart University Companion</title>
+    <title>ScheduleMate - Smart University Companion</title>
     <style>
         :root {
             --primary: #5B45FF;
-            --primary-hover: #4a36e0;
-            --bg-color: #F8F7FF;
+            --primary-light: #8A7BFF;
+            --bg-color: #F8F9FA;
             --text-main: #2D3748;
             --text-light: #718096;
             --card-bg: #FFFFFF;
@@ -21,16 +21,68 @@
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-main);
+            overflow-x: hidden;
         }
 
+        /* Hero Section */
         header {
-            background: linear-gradient(135deg, var(--primary), #9C96FF);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
-            padding: 80px 20px;
+            padding: 40px 20px 100px;
             text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 30px rgba(91, 69, 255, 0.2);
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 15px 35px rgba(91, 69, 255, 0.15);
+            position: relative;
+        }
+
+        /* Elegant Top Nav inside Header */
+        .top-nav {
+            position: absolute;
+            top: 25px;
+            right: 40px;
+            display: flex;
+            gap: 15px;
+            z-index: 20;
+        }
+
+        .top-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .top-nav a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 40px auto 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            border-radius: 25px;
+            padding: 5px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-bottom: 25px;
+            object-fit: cover;
         }
 
         h1 {
@@ -38,66 +90,32 @@
             margin: 0;
             letter-spacing: -1px;
             font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .subtitle {
             font-size: 1.3em;
-            opacity: 0.9;
+            opacity: 0.95;
             max-width: 600px;
             margin: 20px auto 0;
             font-weight: 400;
         }
 
+        /* Main Content */
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: -40px auto 40px;
             padding: 0 20px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin-top: 60px;
-        }
-
-        .feature-card {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(91, 69, 255, 0.15);
-        }
-
-        .feature-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-
-        .feature-card h3 {
-            color: var(--primary);
-            margin-top: 0;
-            font-size: 1.4em;
-        }
-
-        .feature-card p {
-            color: var(--text-light);
-            font-size: 1.05em;
-            margin-bottom: 0;
+            position: relative;
+            z-index: 10;
         }
 
         .about-section {
-            background: white;
-            padding: 60px 40px;
+            background: var(--card-bg);
+            padding: 50px 40px;
             border-radius: 24px;
-            margin-top: 40px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
         }
 
         .about-section h2 {
@@ -106,84 +124,228 @@
             margin-top: 0;
         }
 
+        /* Screenshots Gallery */
+        .gallery-section {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .gallery-section h2 {
+            color: var(--text-main);
+            font-size: 2.2em;
+            margin-bottom: 30px;
+        }
+
+        .gallery-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .gallery-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+        .gallery-scroll::-webkit-scrollbar-thumb {
+            background-color: var(--primary-light);
+            border-radius: 10px;
+        }
+
+        .gallery-scroll img {
+            height: 500px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            object-fit: contain;
+            background-color: black;
+        }
+
+        .gallery-scroll img:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            text-align: left;
+            border-top: 4px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(91, 69, 255, 0.12);
+            border-top: 4px solid var(--primary);
+        }
+
+        .feature-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: rgba(91, 69, 255, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            color: var(--text-main);
+            margin: 0 0 10px 0;
+            font-size: 1.4em;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 1.05em;
+            margin: 0;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
             padding: 40px 20px;
+            background-color: white;
             color: var(--text-light);
-            margin-top: 40px;
+            border-top: 1px solid #eee;
         }
 
-        .legal-links {
-            margin-top: 20px;
-        }
-
-        .legal-links a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0 15px;
-            padding: 8px 16px;
-            background: rgba(91, 69, 255, 0.1);
-            border-radius: 20px;
-            transition: background 0.3s;
-        }
-
-        .legal-links a:hover {
-            background: rgba(91, 69, 255, 0.2);
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5em; }
+            .gallery-scroll img { height: 400px; }
+            .feature-card { padding: 30px 20px; }
+            .top-nav {
+                position: static;
+                justify-content: center;
+                margin-top: -20px;
+                margin-bottom: 30px;
+            }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>ScheduleMate</h1>
-        <p class="subtitle">The ultimate companion for university students to manage time, track grades, and collaborate securely.</p>
+        <!-- Glass effect links inside the header -->
+        <div class="top-nav">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </div>
+
+        <div class="header-content">
+            <img src="logo.png" alt="ScheduleMate Logo" class="logo-img" onerror="this.style.display='none'">
+            <h1>ScheduleMate</h1>
+            <p class="subtitle">The ultimate companion for university students to manage time, track grades, and collaborate securely via Google Drive.</p>
+        </div>
     </header>
 
     <div class="container">
         
         <div class="about-section">
-            <h2>Why choose ScheduleMate?</h2>
-            <p style="font-size: 1.1em; color: var(--text-light); max-width: 700px; margin: 0 auto;">
-                ScheduleMate is built with modern students in mind. We provide a decentralized, privacy-focused environment where your data stays strictly in your personal Google Drive. No third-party servers, no data selling—just pure productivity.
+            <h2>Take Control of Your Academics</h2>
+            <p style="font-size: 1.15em; color: var(--text-light); max-width: 750px; margin: 0 auto;">
+                ScheduleMate is a premium tool built with modern students in mind. Enjoy a completely decentralized, privacy-focused experience where your data stays strictly in your personal Google Drive account. No third-party servers, no data tracking—just pure productivity.
             </p>
+        </div>
+
+        <div class="gallery-section">
+            <h2>App Gallery</h2>
+            <div class="gallery-scroll">
+                <img src="ss/Screenshot 2026-07-20 162141.png" alt="App Screenshot 1">
+                <img src="ss/Screenshot 2026-07-20 162219.png" alt="App Screenshot 2">
+                <img src="ss/Screenshot 2026-07-20 162236.png" alt="App Screenshot 3">
+                <img src="ss/Screenshot 2026-07-20 162254.png" alt="App Screenshot 4">
+                <img src="ss/Screenshot 2026-07-26 092129.png" alt="App Screenshot 5">
+            </div>
         </div>
 
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">📅</div>
+                <div class="feature-icon-wrapper">
+                    <!-- Calendar SVG -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </div>
                 <h3>Smart Timetable</h3>
-                <p>Easily organize your lectures, tutorials, and labs. Get notified before your classes start so you never miss a session.</p>
+                <p>Organize your lectures, tutorials, and labs with ease. Receive intelligent notifications before your classes start so you're always on time.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">📈</div>
+                <div class="feature-icon-wrapper">
+                    <!-- Chart SVG -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                        <polyline points="16 7 22 7 22 13"></polyline>
+                    </svg>
+                </div>
                 <h3>GPA Tracker</h3>
-                <p>Calculate your Semester and Cumulative GPA accurately. Generate and download beautiful PDF result sheets instantly.</p>
+                <p>Calculate your Semester and Cumulative GPA accurately. Generate and download beautiful PDF result sheets instantly to your device.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">👥</div>
-                <h3>Study Rooms</h3>
-                <p>Create decentralized study rooms powered directly by your Google Drive. Share room codes and collaborate with your batchmates.</p>
+                <div class="feature-icon-wrapper">
+                    <!-- Users SVG -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <h3>Decentralized Rooms</h3>
+                <p>Create secure study rooms powered directly by your Google Drive. Share room codes and collaborate exclusively with your chosen peers.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">💬</div>
-                <h3>Real-time Chat & Files</h3>
-                <p>Chat with your study groups and share resources seamlessly. All files and chat logs are securely stored in your personal Google Drive.</p>
+                <div class="feature-icon-wrapper">
+                    <!-- Message/Chat SVG -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <h3>Real-time File Sharing</h3>
+                <p>Chat with your study groups and share resources seamlessly. All files and chat logs are safely stored in your own Google Drive folder.</p>
             </div>
             
             <div class="feature-card">
-                <div class="feature-icon">🔒</div>
+                <div class="feature-icon-wrapper">
+                    <!-- Lock/Privacy SVG -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
                 <h3>Privacy First</h3>
-                <p>Your data belongs to you. Using Google's OAuth 2.0, ScheduleMate syncs everything to your Drive, keeping your information safe and private.</p>
+                <p>Your data belongs to you. Using Google's secure OAuth 2.0, ScheduleMate syncs everything locally and directly to your Drive.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <h3>Beautiful Design</h3>
-                <p>Enjoy a premium user interface with dynamic animations, stunning dark mode, and seamless interactions tailored for a great experience.</p>
+                <div class="feature-icon-wrapper">
+                    <!-- Sparkles/Design SVG -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                    </svg>
+                </div>
+                <h3>Premium Aesthetics</h3>
+                <p>Enjoy a state-of-the-art user interface featuring stunning dynamic animations, deep dark mode, and seamless interactions.</p>
             </div>
         </div>
 
@@ -191,10 +353,6 @@
 
     <footer>
         <p>&copy; 2026 ScheduleMate. Developed with ❤️ for Students.</p>
-        <div class="legal-links">
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="terms.html">Terms of Service</a>
-        </div>
     </footer>
 
 </body>
